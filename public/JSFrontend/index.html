@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+
+        <link rel="stylesheet" href="css/normalize.css">
+        <link rel="stylesheet" href="css/main.css">
+        <script src="js/vendor/modernizr-2.6.2.min.js"></script>
+        
+        <!-- Underscore templates -->
+       	<script type="text/template" id="login_template">
+			<form id="login_form" action="" method="post">
+				<label>Username: </label>
+				<input id="login_form_username" type="text" name="username"/><br />
+				<label>Password: </label>
+				<input id="login_form_password" type="password" name="password"/><br/>
+				<input type="submit" value=" Login "/><br />
+			</form>
+		</script>
+        
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+        <![endif]-->
+
+        <!-- Add your site or application content here -->
+        <div id="header"> 
+        	<div id="logo">                                 
+				<div id="logo_text">
+					<h1>SJB</h1>
+				</div>
+				<div id="logo_quote">
+					<h2>"Man, this blog could use a quote." A.Lincoln</h2>
+				</div>
+			</div>
+            <div id="nav">
+				<!-- navigation buttons will be put here -->
+            </div><!--end nav-->
+        </div><!--end header-->	
+        <div id="wrap">
+	    	<div id="main">    
+				<div id="content">
+					<div id="article" class="article"> 
+					<!-- article content will be here -->
+					</div>
+                	<div class="line"></div>
+				</div><!--end content--> 
+				<div id="sidebar">
+					<div id="author-details">
+    					<h3><span class="status">Status: </span>[ADD YOUR CURRENT STATUS]</h3>
+        				<p>[ADD AN OVERVIEW ABOUT YOUR AREAS OF EXPERTISE]</p>  
+    				</div><!--end author-details-->
+    			</div><!--end sidebar-->
+			</div><!--end main--> 
+    		<div id="footer">
+    			<div class="footer-line"></div> 
+				<p class="copyright">&middot; jfk 2012 &middot;</p> 
+			</div><!--end footer-->
+		</div> 
+
+        <script src="js/jquery.min.js"></script>
+        <script src="js/underscore-min.js"></script>
+        <script src="js/backbone-min.js"></script>
+        
+        <script src="js/plugins.js"></script>
+        
+        <script src="js/loginView.js"></script>
+        <script src="js/controller.js"></script>
+        <script src="js/main.js"></script>
+    </body>
+</html>
