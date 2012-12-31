@@ -1,8 +1,8 @@
 //controller for application
 AppController = Backbone.Router.extend({
-	observers: null,
-	placeholder: null,
-	
+	observers: 		null,
+	placeholder: 	null,
+	loggedIn: 		false,
 	
 	initialize: function(options) {
 		this.placeholder = options.placeholder; 
@@ -14,14 +14,14 @@ AppController = Backbone.Router.extend({
 		"year":	"showTasks"// http://some_adress#2012/12/13
 	},
 	
-	notifyAll: function(year, month, day){
+	notifyAll: function(year, month, day) {
 		for(var i=0; i< this.observers.length; i++){
 			this.observers[i].update(year, month, day);
 		}
 	},
 	
-	sendRequest: function(path, params) {
-		var adr = "https://chamber.cloudfoundry.com/";
+	sendRequest: function(path, params, callback) {
+		var adr = Config.backend_adress;
 		adr += path;
 		
 		var num = 1;
@@ -44,6 +44,7 @@ AppController = Backbone.Router.extend({
 			data: { }
 		}).done(function( response ) {
 			alert("Response " + response);
+			callback(response)
 		});
 	},
 	
@@ -51,18 +52,20 @@ AppController = Backbone.Router.extend({
 		var view = new LoginView({ el: this.placeholder });
 	},
 	
-	loggedIn: function() {
-		//TODO: html5 db
-		return false;
+	handleLogIn: function(response) {
+		alert('handleLogIn()' + response);
+		if(response == true) {
+			//var view = new LoginView({ el: this.$el });
+		}
 	},
 	
 	logIn: function (username, password) {
 		alert("U:" + username +" P:" + password);
-		this.sendRequest("login/remoteLogin",{"j_username": username, "j_password":password});
+		this.sendRequest("login/index.json", {"login": username, "password":password}, this.handleLogIn);
 	},
 	
 	main: function() {
-		if(this.loggedIn()){
+		if(this.loggedIn){
 			this.showCalendar();
 		}else{
 			this.showLogin();

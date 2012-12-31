@@ -12,16 +12,17 @@
 
         <link rel="stylesheet" href="css/normalize.css">
         <link rel="stylesheet" href="css/main.css">
+        
         <script src="js/vendor/modernizr-2.6.2.min.js"></script>
+        
+        <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
         
         <!-- Underscore templates -->
        	<script type="text/template" id="login_template">
-			<form id="login_form" action="" method="post">
-				<label>Username: </label>
-				<input id="login_form_username" type="text" name="username"/><br />
-				<label>Password: </label>
-				<input id="login_form_password" type="password" name="password"/><br/>
-				<input type="submit" value=" Login "/><br />
+			<form id="login_form" action="" method="post" class="form-signin">
+				<input id="login_form_username" type="text" name="username" placeholder="Login użytkownika"/><br />
+				<input id="login_form_password" type="password" name="password" placeholder="Hasło"/><br/>
+				<button class="btn btn-large btn-primary" type="submit">Zaloguj</button>
 			</form>
 		</script>
         
@@ -72,6 +73,7 @@
         
         <script src="js/plugins.js"></script>
         
+        <script src="js/config.js"></script>
         <script src="js/loginView.js"></script>
         <script src="js/controller.js"></script>
         <script src="js/main.js"></script>

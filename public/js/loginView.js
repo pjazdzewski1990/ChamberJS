@@ -2,6 +2,7 @@ LoginView = Backbone.View.extend({
 	initialize : function() {
 		this.render();
 	},
+	
 	render : function() {
 		// Pass variables in using Underscore.js Template
 		var variables = {
@@ -11,19 +12,25 @@ LoginView = Backbone.View.extend({
 		// Load the compiled HTML into the Backbone "el"
 		this.$el.html(template);
 	},
+	
 	events : {
-		"click input[type=submit]" : "submit"
+		"click button[type=submit]" : "submit"
 	},
+	
 	validate: function() {
 		return $("#login_form_username").val().length>0 && $("#login_form_password").val().length>0;
 	},
+	
 	clearError: function() {
 		$("#login_form").removeClass("form_error");
 	},
+	
 	markError: function() {
 		$("#login_form").addClass("form_error");
 	},
+		
 	submit : function(event) {
+		alert('login');
 		if(this.validate()){
 			controller.logIn($("#login_form_username").val(), $("#login_form_password").val());
 			this.clearError();
