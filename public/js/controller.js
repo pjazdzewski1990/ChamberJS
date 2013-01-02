@@ -11,7 +11,7 @@ AppController = Backbone.Router.extend({
 	
 	routes: {
 		"":		"main",
-		"year":	"showTasks"// http://some_adress#2012/12/13
+		"year":	"showTasks"// http://some_address#2012/12/13
 	},
 	
 	notifyAll: function(year, month, day) {
@@ -21,7 +21,7 @@ AppController = Backbone.Router.extend({
 	},
 	
 	sendRequest: function(path, params, callback) {
-		var adr = Config.backend_adress;
+		var adr = Config.backend_address;
 		adr += path;
 		
 		var num = 1;
@@ -43,7 +43,6 @@ AppController = Backbone.Router.extend({
 			url: adr,
 			data: { }
 		}).done(function( response ) {
-			alert("Response " + response);
 			callback(response)
 		});
 	},
@@ -52,10 +51,15 @@ AppController = Backbone.Router.extend({
 		var view = new LoginView({ el: this.placeholder });
 	},
 	
+	showCalendar: function() {
+		alert("showCalendar()");
+		var view = new CalendarView({ el: this.placeholder });
+	},
+	
 	handleLogIn: function(response) {
 		alert('handleLogIn()' + response);
-		if(response == true) {
-			//var view = new LoginView({ el: this.$el });
+		if(JSON.parse(response) == true) {
+			this.showCalendar();
 		}
 	},
 	
