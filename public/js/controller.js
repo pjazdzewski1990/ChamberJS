@@ -3,6 +3,7 @@ AppController = Backbone.Router.extend({
 	observers: 		null,
 	placeholder: 	null,
 	loggedIn: 		false,
+	view:			null,
 	
 	initialize: function(options) {
 		this.placeholder = options.placeholder; 
@@ -11,7 +12,7 @@ AppController = Backbone.Router.extend({
 	
 	routes: {
 		"":		"main",
-		"year":	"showTasks"// http://some_address#2012/12/13
+		":month/:day/:year":	"showTasks"// http://some_address#01/15/2013
 	},
 	
 	notifyAll: function(year, month, day) {
@@ -36,7 +37,6 @@ AppController = Backbone.Router.extend({
 		    adr += params[key];
 		    num++;
 		}
-		alert("ADR: " + adr);
 		
 		$.ajax({
 			type: "GET",
@@ -48,23 +48,21 @@ AppController = Backbone.Router.extend({
 	},
 	
 	showLogin: function() {
-		var view = new LoginView({ el: this.placeholder });
+		this.view = new LoginView({ el: this.placeholder });
 	},
 	
 	showCalendar: function() {
-		alert("showCalendar()");
-		var view = new CalendarView({ el: this.placeholder });
+		this.view = new CalendarView({ el: this.placeholder });
 	},
 	
 	handleLogIn: function(response) {
-		alert('handleLogIn()' + response);
 		if(JSON.parse(response) == true) {
-			this.showCalendar();
+			// wywolanie z zewnatrz: this -> controller
+			controller.showCalendar();
 		}
 	},
 	
 	logIn: function (username, password) {
-		alert("U:" + username +" P:" + password);
 		this.sendRequest("login/index.json", {"login": username, "password":password}, this.handleLogIn);
 	},
 	
@@ -76,7 +74,7 @@ AppController = Backbone.Router.extend({
 		}
 	},
 	
-	showTasks: function(year/*, month, day*/) {
-		alert("Poka¿ "/* + day + "." + month + "."*/ + year);
+	showTasks: function(year, month, day) {
+		alert("Poka¿ " + day + "." + month + "." + year);
 	}
 });

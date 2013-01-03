@@ -4,12 +4,15 @@ CalendarView = Backbone.View.extend({
 	},
 	
 	render : function() {
-		alert("render -calendar");
-		// Pass variables in using Underscore.js Template
-		var variables = { };
-		// Compile the template using underscore
-		var template = _.template($("#calendar_template").html(), variables);
-		// Load the compiled HTML into the Backbone "el"
-		this.$el.html(template);
-	}
+		this.$el.html('');
+		this.$el.datepicker({
+           onSelect: this.handleClick
+        });
+	},
+	
+	handleClick : function(clicked) {
+		controller.navigate("/#" + clicked);
+		var date = clicked.split("/");
+		controller.showTasks(date[1], date[0], date[2]);
+	} 
 });
