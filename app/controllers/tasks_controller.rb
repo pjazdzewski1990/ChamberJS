@@ -80,4 +80,16 @@ class TasksController < ApplicationController
       format.json { head :ok }
     end
   end
+  
+  # GET /tasks/bydate/15_01_2012
+  # GET /tasks/bydate/15_01_2012.json
+  def bydate
+	d = Date.strptime(params[:id], "%d_%m_%Y");;
+    @task = Task.find_by_date(d)
+
+    respond_to do |format|
+      #format.html # show.html.erb
+      format.json { render json: @task }
+    end
+  end
 end

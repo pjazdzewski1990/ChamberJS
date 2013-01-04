@@ -10,10 +10,13 @@ LoginView = Backbone.View.extend({
 		var template = _.template($("#login_template").html(), variables);
 		// Load the compiled HTML into the Backbone "el"
 		this.$el.html(template);
+		
+		//TODO: standardowe eventy nie dzia³aj¹, tzn dziala na 200% normy 
+		$('button[type=submit]').click(this.submit);
 	},
 	
 	events : {
-		"click button[type=submit]" : "submit"
+		//"click button[type=submit]" : "submit"
 	},
 	
 	validate: function() {
@@ -28,13 +31,15 @@ LoginView = Backbone.View.extend({
 		$("#login_form").addClass("form_error");
 	},
 		
+	//TODO: this zastapione przez controller.view, fajnie byloby wrocic do starszej wersji
 	submit : function(event) {
+		event.preventDefault();
 		alert('submit');
-		if(this.validate()){
+		if(controller.view.validate()){
 			controller.logIn($("#login_form_username").val(), $("#login_form_password").val());
-			this.clearError();
+			controller.view.clearError();
 		}else{
-			this.markError();
+			controller.view.markError();
 		}
 		return false;
 	}

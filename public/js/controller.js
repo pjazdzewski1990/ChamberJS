@@ -74,7 +74,14 @@ AppController = Backbone.Router.extend({
 		}
 	},
 	
-	showTasks: function(year, month, day) {
-		alert("Poka¿ " + day + "." + month + "." + year);
+	showTasks: function(month, day, year) {
+		var id = day + "_" + month + "_" + year;
+		alert("ID: " + id);
+		this.sendRequest("tasks/bydate/" + id + ".json", {}, this.handleTask);
+	},
+	
+	handleTask: function(response){
+		// wywolanie z zewnatrz: this -> controller
+		controller.view.showTasks(response);
 	}
 });

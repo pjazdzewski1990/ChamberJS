@@ -4,7 +4,9 @@ ChamberJS::Application.routes.draw do
   resources :tasks
 
   resources :users
-
+  
+  match "/tasks/bydate/:id(.:format)" => "tasks#bydate"
+  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
