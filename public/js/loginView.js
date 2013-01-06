@@ -1,4 +1,6 @@
 LoginView = Backbone.View.extend({
+	formValidator: null,
+	
 	initialize : function() {
 		this.render();
 	},
@@ -10,6 +12,37 @@ LoginView = Backbone.View.extend({
 		var template = _.template($("#login_template").html(), variables);
 		// Load the compiled HTML into the Backbone "el"
 		this.$el.html(template);
+		
+		$('#login_form input').hover(function(){
+			$(this).popover('show');
+		});
+		
+		this.formValidator = $("#login_form").validate({
+			rules: {
+				username: {required:true, notDefaultText: true},
+				password: {required:true, notDefaultText: true}
+			},
+
+			messages:{
+				username: {required:"Uzupełnij", notDefaultText: "Uzupełnij"},
+				password: {required:"Uzupełnij", notDefaultText: "Uzupełnij"}
+			},
+
+			errorClass: "help-inline",
+			errorElement: "span",
+			
+			highlight:function(element, errorClass, validClass)
+			{
+				$(element).removeClass('success');
+				$(element).addClass('error');
+			},
+			
+			unhighlight: function(element, errorClass, validClass)
+			{
+				$(element).removeClass('error');
+				$(element).addClass('success');
+			}
+		});
 	},
 	
 	events : {
@@ -19,24 +52,14 @@ LoginView = Backbone.View.extend({
 	validate: function() {
 		return $("#login_form_username").val().length>0 && $("#login_form_password").val().length>0;
 	},
-	
-	clearError: function() {
-		$("#login_form").removeClass("form_error");
-	},
-	
-	markError: function() {
-		$("#login_form").addClass("form_error");
-	},
 		
 	//TODO: this zastapione przez controller.view, fajnie byloby wrocic do starszej wersji
 	submit : function(event) {
 		event.preventDefault();
 		alert('submit');
-		if(controller.view.validate()){
+		if(controller.view.formValidator.valid()){
 			controller.logIn($("#login_form_username").val(), $("#login_form_password").val());
-			controller.view.clearError();
-		}else{
-			controller.view.markError();
+		} else {
 		}
 		return false;
 	}

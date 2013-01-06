@@ -22,3 +22,12 @@
 }());
 
 // Place any jQuery/helper plugins in here.
+(function( $ ) {
+	$.validator.addMethod("notDefaultText", function (value, element) {
+		if (value == $(element).attr('placeholder')) {
+			return false;
+		} else {
+			return true;
+		}
+	});
+})( jQuery );

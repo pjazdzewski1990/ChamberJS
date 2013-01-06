@@ -11,7 +11,6 @@ AppController = Backbone.Router.extend({
 	},
 	
 	routes: {
-		//"":		"main",
 		":month/:day/:year":	"showTasks"// http://some_address#01/15/2013
 	},
 	
@@ -30,7 +29,6 @@ AppController = Backbone.Router.extend({
 	},
 	
 	loggedIn: function(){
-		var test = this.getFromStorage("_loggedUser") != null;
 		return this.getFromStorage("_loggedUser") != null;
 	},
 	
