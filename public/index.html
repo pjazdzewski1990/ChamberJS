@@ -33,10 +33,27 @@
 		 	<table class="table table-hover">
                 <tbody>
                     <%_.forEach(data, function (u) {%>
-                        <tr onClick="<%= onClickHandler %>">
+						<!-- not the best approach, but for now should work as a quick fix -->
+							<div id="modal_<%=u.id%>" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  								<div class="modal-header">
+    								<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    								<h3 id="Modal_<%=u.id%>_Label">Zadanie #<%=u.id%>: <%=u.title%></h3>
+  								</div>
+  								<div class="modal-body">
+    								<p><%=u.content%></p>
+  								</div>
+  								<div class="modal-footer">
+    								<button class="btn" data-dismiss="modal" aria-hidden="true">Zamknij</button>
+  								</div>
+							</div>
+
+                        <tr>
                             <td> <%=u.id%> </td>
 							<td><b> <%=u.title%> </b></td>
 							<td> <%=u.content%> </td>
+							<td> 
+								<a href="#modal_<%=u.id%>" role="button" class="btn" data-toggle="modal">Pokaż</a>
+							</td>
                         </tr>
                     <%})%>
 	            </tbody>
