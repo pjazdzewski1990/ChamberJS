@@ -86,7 +86,7 @@ class TasksController < ApplicationController
   def bydate
 	d = Date.strptime(params[:id], "%d_%m_%Y")
     @task = Task.find_all_by_date(d)
-
+	print("Wynik " + @task.join(",") + " dla dnia " + d.strftime("%Y-%m-1") + " req " + params[:id])
     respond_to do |format|
       #format.html # show.html.erb
       format.json { render json: @task }

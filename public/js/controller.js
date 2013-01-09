@@ -11,6 +11,7 @@ AppController = Backbone.Router.extend({
 	},
 	
 	routes: {
+		//"/": 					"main",
 		":month/:day/:year":	"showTasks"// http://some_address#01/15/2013
 	},
 	
@@ -91,9 +92,9 @@ AppController = Backbone.Router.extend({
 		}
 	},
 	
-	showTasks: function(month, day, year) {
+	showTasks: function(day, month, year) {
 		var id = day + "_" + month + "_" + year;
-		alert("ID: " + id);
+		alert("TEST: " + id);
 		this.sendRequest("tasks/bydate/" + id + ".json", {}, this.handleTask);
 	},
 	
