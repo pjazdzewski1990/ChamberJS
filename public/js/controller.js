@@ -33,27 +33,31 @@ AppController = Backbone.Router.extend({
 		return this.getFromStorage("_loggedUser") != null;
 	},
 	
-	sendRequest: function(path, params, callback) {
+	//TODO: only GET/POST for time being 
+	sendRequest: function(path, method, params, callback) {
 		var adr = Config.backend_address;
 		adr += path;
 		
-		var num = 1;
-		for (var key in params) {
-			if(num == 1 ){
-				adr += "?";
-			}else{
-				adr += "&";
+		if(method=="GET"){
+			var num = 1;
+			for (var key in params) {
+				if(num == 1 ){
+					adr += "?";
+				}else{
+					adr += "&";
+				}
+				adr += key;
+		    	adr += "=";
+		    	adr += params[key];
+		    	num++;
 			}
-			adr += key;
-		    adr += "=";
-		    adr += params[key];
-		    num++;
+			params = { };
 		}
 		
 		$.ajax({
-			type: "GET",
+			type: method,
 			url: adr,
-			data: { }
+			data: params
 		}).done(function( response ) {
 			callback(response)
 		});
@@ -82,7 +86,7 @@ AppController = Backbone.Router.extend({
 	logIn: function (username, password) {
 		this.tryLogin = username;
 		
-		this.sendRequest("login/index.json", {"login": username, "password":password}, this.handleLogIn);
+		this.sendRequest("login/index.json", "GET", {"login": username, "password":password}, this.handleLogIn);
 	},
 	
 	main: function() {
@@ -96,7 +100,7 @@ AppController = Backbone.Router.extend({
 	showTasks: function(day, month, year) {
 		var id = day + "_" + month + "_" + year;
 		alert("TEST: " + id);
-		this.sendRequest("tasks/bydate/" + id + ".json", {}, this.handleTask);
+		this.sendRequest("tasks/bydate/" + id + ".json", "GET", {}, this.handleTask);
 	},
 	
 	handleTask: function(response){

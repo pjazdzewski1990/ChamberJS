@@ -92,4 +92,25 @@ class TasksController < ApplicationController
       format.json { render json: @task }
     end
   end
+  
+  # POST /tasks/bydate/15_01_2012
+  # POST /tasks/bydate/15_01_2012.json
+  def addbydate
+	print(params)
+	d = Date.strptime(params[:id], "%d_%m_%Y")
+    @task = Task.new()
+	@task.title = params[:task_title]
+	@task.content = params[:task_content]
+	@task.date = d
+	
+    respond_to do |format|
+      if @task.save
+        ##format.html { redirect_to @task, notice: 'Task was successfully created.' }
+        format.json { render json: @task, status: :created, location: @task }
+      else
+        ##format.html { render action: "new" }
+        format.json { render json: @task.errors, status: :unprocessable_entity }
+      end
+    end
+  end
 end

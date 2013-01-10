@@ -65,7 +65,7 @@
 							<td><b> <%=u.title%> </b></td>
 							<td> <%=u.content%> </td>
 							<td> 
-								<a href="#modal_<%=u.id%>" role="button" class="btn" data-toggle="modal">Pokaż</a>
+								<a href="#modal_<%=u.id%>" role="button" class="btn btn-primary" data-toggle="modal">Pokaż</a>
 							</td>
                         </tr>
                     <%})%>
@@ -73,9 +73,19 @@
             </table>
 		</script>
 		
+		<script type="text/template" id="form_template">
+			<form id="task_form" action="" method="post" class="form-signin">
+				<input id="task_title" type="text" name="task_title" rel="popover" placeholder="Tytuł zadania"/><br />
+				<textarea id="task_content" name="task_content" rel="popover" placeholder="Treść zadania" cols="30" rows="5"></textarea>
+				<button class="btn btn-large btn-primary" type="submit">Dodaj</button>
+			</form>
+		</script>
+		
 		<script type="text/template" id="calendar_template">
 			<div id="placeholder_calendar"></div>
 			<div id="placeholder_tasks"></div>
+			<div class="line"></div>
+			<div id="placeholder_form"></div>
 		</script>
         
     </head>
