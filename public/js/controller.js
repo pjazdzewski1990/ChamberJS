@@ -75,6 +75,7 @@ AppController = Backbone.Router.extend({
 			controller.putInStorage("_loggedUser", controller.tryLogin);
 		}else{
 			this.tryLogin = null;
+			controller.view.showLoginError();
 		}
 	},
 	

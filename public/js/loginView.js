@@ -1,11 +1,11 @@
 LoginView = Backbone.View.extend({
 	formValidator: null,
 	
-	initialize : function() {
+	initialize: function() {
 		this.render();
 	},
 	
-	render : function() {
+	render: function() {
 		// Pass variables in using Underscore.js Template
 		var variables = { };
 		// Compile the template using underscore
@@ -45,7 +45,7 @@ LoginView = Backbone.View.extend({
 		});
 	},
 	
-	events : {
+	events: {
 		"click button[type=submit]" : "submit"
 	},
 	
@@ -54,13 +54,16 @@ LoginView = Backbone.View.extend({
 	},
 		
 	//TODO: this zastapione przez controller.view, fajnie byloby wrocic do starszej wersji
-	submit : function(event) {
+	submit: function(event) {
 		event.preventDefault();
 		alert('submit');
 		if(controller.view.formValidator.valid()){
 			controller.logIn($("#login_form_username").val(), $("#login_form_password").val());
-		} else {
 		}
 		return false;
+	},
+	
+	showLoginError: function() {
+		$('#loginErrorModal').modal();
 	}
 });

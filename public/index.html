@@ -22,6 +22,19 @@
         
         <!-- Underscore templates -->
        	<script type="text/template" id="login_template">
+			<div id="loginErrorModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  				<div class="modal-header">
+    				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    				<h3 id="ModalLabel">Błąd</h3>
+  				</div>
+  				<div class="modal-body">
+    				<p>Nieprawidłowy login lub hasło</p>
+  				</div>
+  				<div class="modal-footer">
+    				<button class="btn btn-primary" data-dismiss="modal" aria-hidden="true">Zamknij</button>
+  				</div>
+			</div>
+
 			<form id="login_form" action="" method="post" class="form-signin">
 				<input id="login_form_username" type="text" name="username" rel="popover" placeholder="Login użytkownika"/><br />
 				<input id="login_form_password" type="password" name="password" rel="popover" placeholder="Hasło"/><br/>
@@ -34,18 +47,18 @@
                 <tbody>
                     <%_.forEach(data, function (u) {%>
 						<!-- not the best approach, but for now should work as a quick fix -->
-							<div id="modal_<%=u.id%>" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  								<div class="modal-header">
-    								<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-    								<h3 id="Modal_<%=u.id%>_Label">Zadanie #<%=u.id%>: <%=u.title%></h3>
-  								</div>
-  								<div class="modal-body">
-    								<p><%=u.content%></p>
-  								</div>
-  								<div class="modal-footer">
-    								<button class="btn" data-dismiss="modal" aria-hidden="true">Zamknij</button>
-  								</div>
-							</div>
+						<div id="modal_<%=u.id%>" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  							<div class="modal-header">
+    							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    							<h3 id="Modal_<%=u.id%>_Label">Zadanie #<%=u.id%>: <%=u.title%></h3>
+  							</div>
+  							<div class="modal-body">
+    							<p><%=u.content%></p>
+  							</div>
+  							<div class="modal-footer">
+    							<button class="btn btn-primary" data-dismiss="modal" aria-hidden="true">Zamknij</button>
+  							</div>
+						</div>
 
                         <tr>
                             <td> <%=u.id%> </td>
